@@ -1,0 +1,28 @@
+extract:
+  - step:
+    action: extract.source.http.DownloadFiles
+    fetch:
+      - 'https://rawgit.com/enigmadocs/parsers/master/webscrape-list/monthly_revenue.html'
+
+  - step: Set the schema
+    action: transform.schema.SetSchema
+    fields:
+      - name: Month
+        type: string
+      - name: Revenue
+        type: string
+
+  - step: Download the data via HTTP
+    action: extract.formats.html.ReadRecords
+    record_selector: div#monthly_revenue > ul > li
+    extract:
+      - selector: span
+        child_index: 0
+        property: text
+      - selector: span
+        child_index: 1
+        property: text
+
+  - step: Save locally
+    action: load.OutputCSV
+    repository: .
