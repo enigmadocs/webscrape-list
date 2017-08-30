@@ -2,7 +2,7 @@ extract:
   - step:
     action: extract.source.http.DownloadFiles
     fetch:
-      - 'https://rawgit.com/enigmadocs/parsers/master/webscrape-list/monthly_revenue.html'
+      - 'https://rawgit.com/enigmadocs/webscrape-list/master/monthly_revenue.html'
 
   - step: Set the schema
     action: transform.schema.SetSchema
